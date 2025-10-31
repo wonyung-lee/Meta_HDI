@@ -1,11 +1,9 @@
-# Meta-HDI (Training-only Release)
+# Meta-HDI
 
-Minimal, **training-focused** code layout for the Meta-HDI project to demonstrate two stages:
+Meta-HDI project for identifying herb-drug interactions to demonstrate two stages:
 
 1) **DDI pretraining** (drug–drug interaction knowledge)
 2) **HDI finetuning** (herb–drug interactions with compound-level interpretation)
-
-> **Note**: This public release is *training-only*. **No proprietary data** (e.g., DrugBank-derived files, clinical/IRB data, or internal pickles) are included. You run the pipeline with your **own** graph/path pickles or synthetic examples.
 
 ---
 
@@ -30,32 +28,11 @@ meta-hdi/
    ├─ train_ddi.py             # pretrain entry point
    └─ finetune_hdi.py          # finetune entry point
 ```
-
-You can start with **your own** pickles, e.g.:
-- `graph_HDI_start_1_26394.pkl` (graph dict with node count / edges / optional node embeddings)
-- `DDI_path_dict_*.pkl` (DDI path dictionary list with labels)
-- `KMSDR_*_path_dict_*.pkl` (HDI path dictionary list with labels)
-
-If you cannot share data, prepare **synthetic** examples that match the same interface.
-
 ---
 
 ## Installation
 
 We recommend Python **3.10** (tested with 3.10.11). From a clean environment:
-
-```bash
-# (option A) conda
-conda create -n meta-hdi python=3.10 -y
-conda activate meta-hdi
-pip install -r requirements.txt
-
-# (option B) venv
-python -m venv .venv
-source .venv/bin/activate     # Windows: .venv\Scripts\activate
-pip install -r requirements.txt
-```
-
 > If you plan to use GPU, install the appropriate **PyTorch** build for your CUDA version from https://pytorch.org/get-started/locally/ and then install the rest from `requirements.txt` (remove the torch line first, or install torch again with the CUDA wheel).
 
 ---
@@ -133,16 +110,6 @@ During finetuning, you can **freeze** some backbone modules via config (e.g., GC
 - This repository does **not** ship proprietary or restricted databases (DrugBank, TTD, etc.).
 - If you use such sources, ensure you have the appropriate **licenses/permissions** and build the required pickles locally.
 - Clinical/IRB datasets are **not** included in this training-only release.
-
----
-
-## Citation
-
-If this code helps your research, please cite the associated manuscript:
-
-> Lee WY, Mo KH, Kim S, et al. Metapath-guided transfer learning with clinical validation for identifying herb–drug interactions. (Year, Journal – add when available)
-
-You can also add a `CITATION.cff` later to make GitHub citation metadata clickable.
 
 ---
 
