@@ -1,0 +1,20 @@
+# DDI pretraining config (edit the paths to your local files)
+device: "cuda:0"          # or "cpu"
+out_dir: "outputs/ddi"
+
+data:
+  # Use forward slashes even on Windows, or wrap with quotes.
+  graph: "data/graph_HDI_start_1_26394.pkl"
+  ddi_paths: "data/DDI_path_dict_120129_onlypos_path_unspecified.pkl"
+
+model:
+  emb_dim: 128            # node embedding dim (ignored if graph includes pretrained_node_emb)
+  max_len: 8              # path padding length
+  num_types: 7            # number of node types in your graph
+  num_labels: 8           # DDI multilabel size
+
+train:
+  epochs: 10
+  batch_size: 64
+  lr: 7e-4
+  seed: 42

@@ -1,0 +1,23 @@
+# HDI finetuning config (loads DDI-pretrained weights)
+device: "cuda:0"          # or "cpu"
+out_dir: "outputs/hdi"
+
+data:
+  graph: "data/graph_HDI_start_1_26394.pkl"
+  hdi_paths: "data/KMSDR_ing_com_path_dict_unspecified_240811.pkl"
+
+model:
+  emb_dim: 128
+  max_len: 8
+  num_types: 7
+  num_labels: 3           # e.g., [increase, decrease, excretion]
+
+pretrained:
+  path: "outputs/ddi/ddi_pretrained.pt"   # produced by train_ddi.py
+  freeze_backbone: true                   # freeze GCN/LSTM and train attention/classifier only
+
+train:
+  epochs: 20
+  batch_size: 32
+  lr: 5e-4
+  seed: 42
